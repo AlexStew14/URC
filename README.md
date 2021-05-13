@@ -4,5 +4,9 @@
 
 #### Course: CS 4540, University of Utah, School of Computing
 
+Images of the project:
 
-![Opportunities Page](https://github.com/AlexStew14/URC/blob/main/URC/GithubImages/Admin_Portal.PNG?raw=true)
+![Admin Portal](https://github.com/AlexStew14/URC/blob/main/URC/GithubImages/Admin_Portal.PNG?raw=true)
+![Opportunity Details](https://github.com/AlexStew14/URC/blob/main/URC/GithubImages/Opportunity_Details.PNG?raw=true)
+![Student Details](https://github.com/AlexStew14/URC/blob/main/URC/GithubImages/Student_Details.PNG?raw=true)
+![Opportunities View](https://github.com/AlexStew14/URC/blob/main/URC/GithubImages/Opportunities.PNG?raw=true)
