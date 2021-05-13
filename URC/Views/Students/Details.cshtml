@@ -1,0 +1,206 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      October 23, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Details page for a Student (application) entity.
+-->
+
+@model URC.Controllers.StudentsController.DetailsModel
+@Html.AntiForgeryToken()
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+
+<body class="body-research-background text-light">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Student Profile Details</div>
+    </div>
+    <div class="gray-background round-corners">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var stud = User.Claims.Where(o => o.Value == "Student");
+            <div>
+                <dl class="row" style="padding-left: 10px;">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.student.Uid)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.Uid)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Student Name
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.StudentName)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Skills
+                    </dt>
+                    <dd class="col-sm-10">
+                        @{
+                            // gather a list of skills
+                            List<string> skills = new List<string>();
+                            foreach (var skill in Model.student.StudentSkills)
+                            {
+                                skills.Add(skill.SkillName);
+                            }
+                        }
+                        @string.Join(", ", skills)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Completed Courses
+                    </dt>
+                    <dd class="col-sm-10">
+                        @{
+                            // gather a list of completed courses
+                            List<string> completedCourses = new List<string>();
+                            foreach (var c in Model.student.CompletedCourses)
+                            {
+                                completedCourses.Add(c.CompletedCourseName);
+                            }
+                        }
+                        @string.Join(", ", completedCourses)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.student.Interests)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @{
+                            // gather a list of interest
+                            List<string> interests = new List<string>();
+                            foreach (var i in Model.student.Interests)
+                            {
+                                interests.Add(i.InterestName);
+                            }
+                        }
+                        @string.Join(", ", interests)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Recommended Opportunities
+                    </dt>
+                    <dd class="col-sm-10">
+                        @{
+                            // gather a list of interest
+                            List<string> recOpp = new List<string>();
+                            foreach (var i in Model.student.RecommendedOpportunities)
+                            {
+                                recOpp.Add(i.opportunity.ProjectName);
+                            }
+                        }
+                        @string.Join(", ", recOpp)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Popular Opportunity Skills
+                    </dt>
+                    <dd class="col-sm-10">
+                        @{
+                            // gather a list of interest
+                            List<string> popReqSkills = new List<string>();
+                            foreach (var i in Model.popRequiredSkills)
+                            {
+                                popReqSkills.Add(i.name);
+                            }
+                        }
+                        @string.Join(", ", popReqSkills)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Popular Student Skills
+                    </dt>
+                    <dd class="col-sm-10">
+                        @{
+                            // gather a list of interest
+                            List<string> popStuSkills = new List<string>();
+                            foreach (var i in Model.popStudentSkills)
+                            {
+                                popStuSkills.Add(i.name);
+                            }
+                        }
+                        @string.Join(", ", popStuSkills)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Available Hrs/Week
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.AvailableHoursPerWeek)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Degree
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.DegreePlan)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Personal Statement
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.PersonalStatement)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Graduation Date
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.ExpectedGraduationDate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Profile Creation Date
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.ProfileCreationDate)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.student.GPA)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.student.GPA)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.student.Active)
+                    </dt>
+                    <dd id="active-check-box" class="col-sm-1">
+                        @Html.DisplayFor(model => model.student.Active)
+                    </dd>
+                    <dd id="@Model.student.ID" class="col-sm-6">
+                        @if (stud.Count() > 0)
+                        {
+                            @if (Model.student.Active)
+                            {
+                                <button id="btn-toggle-active" class="btn-sm btn-danger">Set Application Inactive</button>
+                            }
+                            else
+                            {
+                                <button id="btn-toggle-inactive" class="btn-sm btn-success">Set Application Active</button>
+                            }
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <div style="padding-bottom: 10px;">
+                @if (stud.Count() > 0)
+                {
+                    <a style="padding-left: 10px;" asp-action="Edit" asp-route-id="@Model.student.ID"><button type="button" class="btn btn-primary">Edit</button></a>
+                    @section Scripts {
+                        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                        <script src="~/js/ApplicationActiveToggle.js"></script>
+                    }
+                }
+                <a style="padding-left: 10px;" asp-action="Index"><button type="button" class="btn btn-secondary">Back to Overview</button></a>
+            </div>
+        }
+    </div>
+</body>

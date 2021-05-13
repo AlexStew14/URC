@@ -1,0 +1,441 @@
+﻿/**
+ * Author:    Jantzen Allphin
+ * Partner:   None
+ * Date:      September 2, 2020
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Jantzen Allphin, certify that I wrote this code (below) from scratch and did 
+ * not copy it in part or whole from another source.  Any references used 
+ * in the completion of the assignment are cited in my README file and in
+ * the appropriate method header.
+ *
+ * File Contents
+ *
+ *    Contains CSS code to style the HTML of the Opportunity/Details web pages.
+ */
+
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    /* For sticky navbar header */
+    padding-top: 65px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}
+
+/*-------------For Opportunity/Details page----------------------*/
+
+#apply-button {
+    background-color: darkred;
+}
+
+.delete-btn {
+    background-color: darkred;
+}
+
+#apply-button:hover {
+    background-color: red;
+}
+
+#cancel-apply-opp {
+    color: red;
+}
+
+.header-container {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    color: white;
+}
+
+.header-title {
+    font-size: 35px;
+    position: absolute;
+    top: 50px;
+    color: white;
+    background-color: darkred;
+    padding-left: 50px;
+    padding-right: 5px;
+}
+
+#search-students-bar {
+    font-size: 35px;
+    position: absolute;
+    top: -25px;
+    right: -150px;
+    color: white;
+    background-color: transparent;
+}
+
+#header-image-details-page {
+    margin: -600px 0px 0px -800px;
+    filter: brightness(90%);
+}
+
+.opp-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: flex-start;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    margin: 5px 0px;
+}
+
+    .opp-item:hover {
+        background-color: darkred;
+        color: #fefafa;
+    }
+
+#opportunities {
+    padding: 10px 0px;
+}
+
+    #opportunities a {
+        text-decoration: none;
+    }
+
+.opp-item-info-container, .opp-item-summary-container {
+    width: 40%;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.opp-item-summary-container p {
+    text-align: left;
+    font-size: 14px;
+}
+
+.opp-item-image {
+    max-height: 100%;
+    max-width: 120px;
+}
+
+#opp-details-image {
+    background-size: contain;
+}
+
+#opp-details-image-container {
+    height: 500px;
+    width: 500px;
+    float: right;
+    overflow: hidden;
+}
+
+#opp-details-description {
+    max-width: 60%;
+}
+
+.img-fluid {
+    max-height: 100%;
+}
+
+.opp-item-info-table {
+    font-size: 16px;
+}
+
+.td-category {
+    padding-right: 20px;
+}
+
+.td-category-details {
+    padding-right: 70px;
+    font-weight: 500;
+    font-size: 1.25rem;
+}
+
+#opp-details-article {
+    display: block;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.round-corners {
+    border-radius: 10px;
+    border: 2px solid black;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+#opp-details-article div {
+    padding-bottom: 30px;
+}
+
+#opp-details-header {
+    padding-top: 10px;
+    text-align: center;
+}
+
+#opp-details-article header, #opp-details-article div {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#horizontal-rule-details-page {
+    width: 95%;
+}
+
+/*-------------Login/Register Page----------------------*/
+.hr-light {
+    background-color: white;
+}
+
+/*-------------For home page and nav bar----------------------*/
+
+.carousel-item img {
+    filter: brightness(60%);
+}
+
+#home-page-main {
+    background-color: white;
+}
+
+.carousel-caption {
+    padding-bottom: 60px;
+}
+
+.carousel-caption h5 {
+    color: white;
+    font: bold;
+    font-size: 32px;
+}
+
+.carousel-caption p {
+    color: white;
+    font: bold;
+}
+
+#marketing-table-container {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.img-circle {
+    border-radius: 70%;
+    vertical-align: middle;
+}
+
+nav {
+    margin-bottom: 10px;
+}
+
+.dropdown-menu .nav-link:hover {
+    background-color: gray;
+}
+
+#my_name_for_grading:hover {
+    background-color: white;
+}
+
+.dropdown-menu {
+    padding: 0px 0px;
+    background-color: darkred;
+}
+
+#account-type {
+    color: white;
+    font: bold;
+}
+
+#account-dropdown {
+    float: right;
+}
+
+/*-------------For application page----------------------*/
+
+#application-header {
+    color: black;
+    text-align: center;
+    padding: 30px 0px;
+}
+
+#submit-application-btn-container {
+    text-align: center;
+}
+
+#submit-application-btn {
+    width: 200px;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#submit-application-btn:hover {
+    background-color: red;
+}
+
+#application-main {
+    background-color: white;
+}
+
+.body-research-background {
+    background: url(/images/uofu-campus.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#application-form {
+    padding: 0px 10px;
+}
+
+/*-------------For create opp page----------------------*/
+
+.small {
+    width: 200px;
+}
+
+#create-image {
+    visibility: hidden; 
+    margin: 0px;
+    padding: 0px;
+}
+
+#upload-btn {
+    margin-top: 10px;
+}
+
+#spinner {
+    display: none;
+}
+
+/*-------------For admin page----------------------*/
+
+.octicon:hover {
+    cursor: pointer;
+}
+
+.octicon-check {
+    color: green;
+}
+
+.octicon-dash {
+    color: red;
+}
+
+#admin-page-title {
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+#admin-page-main {
+    background-color: white;
+}
+
+.gray-background{
+    background-color: rgba(9, 9, 9, 0.95);
+}
+
+/*-------------For manage application page----------*/
+.octicon-x {
+    color: red;
+}
+
+.manage-application-div {
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+/*-------------For search page----------------------*/
+
+#search-button {
+    background-color: darkred;
+    color: white;
+}
+
+#search-button:hover {
+    background-color: forestgreen;
+    color: white;
+}
+
+#search-icon {
+    padding-right: 10px;
+}
+
+#search-card {
+    background-color: lightgray;
+}
+
+#cards a:hover {
+    background-color: darkred;
+    color: white;
+}
+
+#cards a {
+    text-decoration: none;
+    color: black;
+}
+
+/*-----------------Student Profiles Page --------------*/
+
+.white-table {
+    background-color: white;
+}

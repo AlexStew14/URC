@@ -1,0 +1,97 @@
+﻿@model URC.Models.Opportunity
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject UserManager<URCUser> UserManager
+@inject URC.Data.URC_Context urc_context
+
+@{
+    ViewData["Title"] = "Manage";
+}
+
+<body class="gray-background">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Manage Applications: @Model.ProjectName</div>
+    </div>
+    <div class="manage-application-div" style="background-color: white;">
+        <h3 style="padding-left: 10px;">New Applications</h3>
+        <hr style="background-color: black;" />
+        <table id="new-table" class="display">
+            <thead>
+                <tr>
+                    <th class="dt-center">UID</th>
+                    <th class="dt-center">Name</th>
+                    <th class="dt-center">Details</th>
+                    <th class="dt-center">Status</th>
+                    <th class="dt-center">Accept</th>
+                    <th class="dt-center">Deny</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Application application in Model.Applications)
+                {
+                    @if (application.Status == "submitted")
+                    {
+                        var student = urc_context.Students.FirstOrDefault(s => s.Sid == application.StudentID);
+                        <tr id="@application.ID">
+                            <td class="dt-center">@student.Uid</td>
+                            <td class="dt-center">@student.StudentName</td>
+                            <td class="dt-center"><a asp-controller="Applications" asp-action="Details" asp-route-id="@application.ID"><button type="button" class="btn-sm btn-primary">View</button></a></td>
+                            <td class="dt-center">@application.Status</td>
+                            <td class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                            <td class="octicon-x-red dt-center"><i class="octicon octicon-x"></i></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="manage-application-div" style="background-color: white;">
+        <h3 style="padding-left: 10px;">Reviewed Applications</h3>
+        <hr style="background-color: black;" />
+        <table id="reviewed-table" class="display">
+            <thead>
+                <tr>
+                    <th class="dt-center">UID</th>
+                    <th class="dt-center">Name</th>
+                    <th class="dt-center">Details</th>
+                    <th class="dt-center">Status</th>
+                    <th class="dt-center">Accept</th>
+                    <th class="dt-center">Deny</th>
+                </tr>
+            </thead>
+            <tbody id="reviewed-tbody">
+                @foreach (Application application in Model.Applications)
+                {
+                    @if (application.Status != "submitted")
+                    {
+                        var student = urc_context.Students.FirstOrDefault(s => s.Sid == application.StudentID);
+                <tr id="@application.ID">
+                    <td class="dt-center">@student.Uid</td>
+                    <td class="dt-center">@student.StudentName</td>
+                    <td class="dt-center"><a asp-controller="Applications" asp-action="Details" asp-route-id="@application.ID"><button type="button" class="btn-sm btn-primary">View</button></a></td>
+                    <td class="dt-center">@application.Status</td>
+                    <td class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                    <td class="octicon-x-red dt-center"><i class="octicon octicon-x"></i></td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="stylesheet" , href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css" />
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(function () {
+            $('#new-table').DataTable();
+            $('#reviewed-table').DataTable();
+        });
+    </script>
+    <script src="~/js/AcceptDenyApplication.js"></script>
+}
+

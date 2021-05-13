@@ -1,0 +1,79 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      October 23, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Search page for a Student (application) entity.
+-->
+
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<body class="body-research-background">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Student Search</div>
+        @*Thanks to https://bootsnipp.com/snippets/35V6b for the great starter template for this nice search bar design!*@
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        <div id="search-students-bar" class="container">
+            <br />
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-10 col-lg-8">
+                    <form id="search-card" class="card">
+                        <div class="card-body row no-gutters align-items-center">
+                            <div id="search-icon" class="col-auto">
+                                <i class="fas fa-search h4 text-body"></i>
+                            </div>
+                            <!--end of col-->
+                            <div class="col">
+                                <input id="search-input" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search student skills (space-separated)">
+                            </div>
+                            <!--end of col-->
+                            <div class="col-auto">
+                                <button id="search-button" class="btn btn-lg">Search</button>
+                            </div>
+                            <!--end of col-->
+                        </div>
+                    </form>
+                </div>
+                <!--end of col-->
+            </div>
+        </div>
+    </div>
+    <main>
+        <div id="template" class="card rounded gray-background" style="display: none;">
+            <a id="app-link" href="/Students/Details/">
+                <div class="card-body row text-light">
+                    <div class="col-3">
+                        <h4 class="card-title" id="student-name"></h4>
+                        <hr />
+                        <p id="student-uid" class="card-text"></p>
+                        <p id="student-gpa" class="card-text"></p>
+                    </div>
+                    <div class="col-5">
+                        <p id="student-statement"></p>
+                    </div>
+                    <div class="col-3">
+                        <p id="student-skills"></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div id="cards">
+
+        </div>
+    </main>
+</body>
+
+@section Scripts {
+    <script src="~/js/StudentSearch.js"></script>
+}

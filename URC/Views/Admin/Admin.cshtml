@@ -1,0 +1,76 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<body class="gray-background">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Users/Roles Administration Page</div>
+    </div>
+    <main id="admin-page-main">
+        <div style="padding-top: 10px;">
+            <table id="table_id" class="display">
+                <thead>
+                    <tr>
+                        <th class="dt-center">User</th>
+                        <th class="dt-center">Administrator</th>
+                        <th class="dt-center">Professor</th>
+                        <th class="dt-center">Student</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (URCUser user in UserManager.Users.ToArray())
+                    {
+                        <tr id=@user.Id>
+                            <td class="dt-center">@user.Email</td>
+
+                            @if (await UserManager.IsInRoleAsync(user, "Administrator"))
+                            {
+                                <td id="Administrator" class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                            }
+                            else
+                            {
+                                <td id="Administrator" class="octicon-dash-red dt-center"><i class="octicon octicon-dash"></i></td>
+                            }
+                            @if (await UserManager.IsInRoleAsync(user, "Professor"))
+                            {
+                                <td id="Professor" class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                            }
+                            else
+                            {
+                                <td id="Professor" class="octicon-dash-red dt-center"><i class="octicon octicon-dash"></i></td>
+                            }
+                            @if (await UserManager.IsInRoleAsync(user, "Student"))
+                            {
+                                <td id="Student" class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                            }
+                            else
+                            {
+                                <td id="Student" class="octicon-dash-red dt-center"><i class="octicon octicon-dash"></i></td>
+                            }
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <link rel="stylesheet" , href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css" />
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        $(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+    <script src="~/js/UserRole.js"></script>
+}
+

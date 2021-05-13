@@ -1,0 +1,72 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      September 23, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Index page for an Opportunity entity.
+-->
+
+@model IEnumerable<URC.Models.Opportunity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body class="body-research-background">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Research Opportunities at the University of Utah</div>
+    </div>
+    <main>
+        <div id="opportunities">
+            @foreach (var item in Model)
+            {
+                <a asp-action="Details" asp-route-id="@item.ID" data-toggle="tooltip" title="Click for more details">
+                    <div class="opp-item gray-background" id="opp-@item.ID">
+                        <div class="opp-item-info-container" id="opp-item-info-container-@item.ID">
+                            <h5 class="opp-item-info-title" id="opp-item-info-title-@item.ID">
+                                @Html.DisplayFor(modelItem => item.ProjectName)
+                            </h5>
+                            <table class="opp-item-info-table" id="opp-item-info-table-@item.ID">
+                                <tr class="info-table-professor">
+                                    <td class="td-category">Professor:</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ProfessorName)</td>
+                                </tr>
+                                <tr class="info-table-tags">
+                                    @{
+                                        List<string> tagNames = new List<string>();
+                                        foreach (var tag in item.Tags)
+                                        {
+                                            tagNames.Add(tag.TagName);
+                                        }
+                                    }
+                                    <td class="td-category">Tags:</td>
+                                    <td>@string.Join(", ", tagNames)</td>
+                                </tr>
+                                <tr class="info-table-begin-date">
+                                    <td class="td-category">Begin Date:</td>
+                                    <td>@Html.DisplayFor(modelItem => item.BeginDate)</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="opp-item-summary-container" id="opp-item-summary-container-@item.ID">
+                            <p id="opp-item-summary-@item.ID">
+                                @Html.DisplayFor(modelItem => item.ProjectDescription)
+                            </p>
+                        </div>
+                        <div class="opp-item-image-container" id="opp-item-image-container-@item.ID">
+                            <img class="opp-item-image img-thumbnail" id="opp-item-image-@item.ID" src="~/uploads/@item.ProjectImage" alt="University of Utah logo" />
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </main>
+</body>

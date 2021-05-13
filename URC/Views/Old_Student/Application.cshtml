@@ -1,0 +1,140 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      September 10, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code for the application page where a student can fill out a research application.
+-->
+
+@{
+    ViewData["Title"] = "Application";
+}
+
+<body id="application-body">
+    <main id="application-main">
+        <div id="header-container-application-page">
+            <h1 id="application-header">Student Research Application</h1>
+        </div>
+        <form id="application-form">
+            <div class="form-row" id="name-uid-row">
+                <div class="form-group col-md-4">
+                    <label for="first-name">First Name</label>
+                    <input type="text" class="form-control" id="first-name" placeholder="John">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" class="form-control" id="last-name" placeholder="Smith">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="uid">uID</label>
+                    <input type="text" class="form-control" id="uid" placeholder="u0123456">
+                </div>
+            </div>
+            <div class="form-row" id="email-phone-row">
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="john@myemail.com">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="phone">Phone Number (optional)</label>
+                    <input type="tel" class="form-control" id="phone" placeholder="(123)-456-789">
+                </div>
+            </div>
+            <div class="form-row" id="major-status-row">
+                <div class="form-group col-md-6">
+                    <label for="major">Major</label>
+                    <input type="text" class="form-control" id="major" placeholder="Computer Science">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="status">Status</label>
+                    <select id="status" class="form-control">
+                        <option selected>Choose...</option>
+                        <option>Freshman</option>
+                        <option>Sophomore</option>
+                        <option>Junior</option>
+                        <option>Senior</option>
+                        <option>Graduated</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" id="skills-group">
+                <label for="skills" data-toggle="tooltip" title="Enter some of your skills">Skills</label>
+                <textarea type="text" class="form-control" id="skills"></textarea>
+            </div>
+            <div class="form-group" id="interests-group">
+                <label for="interests" data-toggle="tooltip" title="Enter some of your interests">Interests</label>
+                <textarea type="text" class="form-control" id="interests"></textarea>
+            </div>
+            <div class="form-row" id="compensation-checkbox-row">
+                <div class="form-group col-md-3">
+                    <label class="form-check-label" data-toggle="tooltip" title="Check all that apply">
+                        Compensation Interest:
+                    </label>
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-check-input" type="checkbox" id="volunteer-checkbox">
+                    <label class="form-check-label" for="volunteer-checkbox">
+                        Volunteer
+                    </label>
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-check-input" type="checkbox" id="credit-checkbox">
+                    <label class="form-check-label" for="credit-checkbox">
+                        School Credit
+                    </label>
+                </div>
+                <div class="form-group col-md-3">
+                    <input class="form-check-input" type="checkbox" id="paid-checkbox">
+                    <label class="form-check-label" for="paid-checkbox">
+                        Paid
+                    </label>
+                </div>
+            </div>
+            <div class="form-row" id="hours-radio-row">
+                <div class="form-group col-md-2">
+                    <label class="form-check-label" data-toggle="tooltip" title="Select one that approximates your expected availability in hours">
+                        Available Hours:
+                    </label>
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="ten-hours-radio" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="ten-hours-radio">10 or less</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="twenty-hours-radio" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="twenty-hours-radio">20 or less</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="thirty-hours-radio" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="thirty-hours-radio">30 or less</label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="custom-control custom-radio custom-control-inline">
+                        <input type="radio" id="gt-thirty-hours-radio" name="customRadioInline1" class="custom-control-input">
+                        <label class="custom-control-label" for="gt-thirty-hours-radio">30 or more</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" id="resume-group">
+                <label for="resume">Upload Resume:</label>
+                <input type="file" class="form-control-file" id="resume">
+            </div>
+            <div id="submit-application-btn-container">
+                <button id="submit-application-btn" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </main>
+</body>

@@ -1,0 +1,202 @@
+/**
+ * Author:    Jantzen Allphin
+ * Partner:   None
+ * Date:      October 23, 2020
+ * Course:    CS 4540, University of Utah, School of Computing
+ * Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+ *
+ * I, Jantzen Allphin, certify that I wrote this code (below) from scratch and did 
+ * not copy it in part or whole from another source.  Any references used 
+ * in the completion of the assignment are cited in my README file and in
+ * the appropriate method header.
+ *
+ * File Contents
+ *
+ *    Contains JSON code for the URC API.
+ */
+
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1",
+    "title": "URC API Information",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://ec2-54-175-190-112.compute-1.amazonaws.com"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Student": {
+        "properties": {
+          "ID": {
+            "type": "number"
+          },
+          "Uid": {
+            "type": "string"
+          },
+          "GPA": {
+            "type": "number"
+          },
+          "StudentName": {
+            "type": "string"
+          },
+          "PersonalStatement": {
+            "type": "string"
+          },
+          "StudentSkills": {
+            "type": "array"
+          }
+        }
+      }
+    },
+    "Error": {
+      "properties": {
+        "message": {
+          "type":  "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/Students/Find": {
+      "post": {
+        "summary": "Find students by skills",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "RequestVerificationToken",
+            "in": "header",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "description": "The skills (space seperated) to be searched.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "message"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Students that match given skills",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Students/Apply": {
+      "post": {
+        "summary": "Change Student Appliction to Active/Inactive",
+        "tags": [
+          "user"
+        ],
+        "parameters": [
+          {
+            "name": "RequestVerificationToken",
+            "in": "header",
+            "content": {
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "description": "The student application id.",
+                    "type": "string"
+                  },
+                  "apply_remove": {
+                    "description": "To set to active use 'apply', for inactive use 'remove'.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "apply_remove"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success or failure message",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      December 6, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Application Index page.
+-->
+@model IEnumerable<URC.Models.Application>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<body class="body-research-background text-light">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">My Applications</div>
+    </div>
+    <table class="table text-light gray-background round-corners">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Opportunity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Statement)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opportunity.ProjectName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Statement)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="btn-group-sm btn-dark text-light">Edit</button></a>
+                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="btn-group-sm btn-success">View</button></a>
+                        <a asp-action="Delete" asp-route-id="@item.ID"><button type="button" class="btn-group-sm delete-btn text-light">Delete</button></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

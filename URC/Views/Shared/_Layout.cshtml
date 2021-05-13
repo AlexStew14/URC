@@ -1,0 +1,108 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      September 2, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code for the header and navbar common across all pages.
+-->
+
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="author" content="Jantzen Allphin" />
+    <meta name="description" content="An undergraduate research opportunity coordinator for the University of Utah.">
+    <meta charset="utf-8" />
+    <meta name="keywords" content="Undergraduate Research Opportunities, Undergraduate Research Opportunity Coordinator, URC">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - URC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav id="main-navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">URC</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var admin = User.Claims.Where(o => o.Value == "Administrator");
+                        var prof = User.Claims.Where(o => o.Value == "Professor");
+                        var stud = User.Claims.Where(o => o.Value == "Student");
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Research
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="nav-link" asp-controller="Opportunities" asp-action="Index">Opportunities</a>
+                                @if (prof.Count() > 0 || admin.Count() > 0)
+                                {
+                                    <a class="nav-link" asp-controller="Opportunities" asp-action="List">Short List</a>
+                                }
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Students
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                @if (stud.Count() > 0)
+                                {
+                                    <a class="nav-link" asp-controller="Students" asp-action="Index">My Profile</a>
+                                    <a class="nav-link" asp-controller="Applications" asp-action="Index">My Applications</a>
+                                }
+                                @if (prof.Count() > 0 || admin.Count() > 0)
+                                {
+                                    <a class="nav-link" asp-controller="Students" asp-action="Index">Student Profiles</a>
+                                    <a class="nav-link" asp-controller="Students" asp-action="Search">Student Search</a>
+                                }
+                            </div>
+                        </li>
+                        if (admin.Count() > 0)
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link active" asp-controller="Admin" asp-action="Admin">Admin</a>
+                            </li>
+                        }
+                    }
+                </ul>
+                <partial name="_LoginPartial" />
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - URC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

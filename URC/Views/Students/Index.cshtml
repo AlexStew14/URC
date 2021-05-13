@@ -1,0 +1,194 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      October 23, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Index page for a Student (application) entity.
+-->
+
+@model IEnumerable<URC.Models.Student>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var admin = User.Claims.Where(o => o.Value == "Administrator");
+    var prof = User.Claims.Where(o => o.Value == "Professor");
+    var stud = User.Claims.Where(o => o.Value == "Student");
+    var hasApp = false;
+    var user = await UserManager.FindByNameAsync(User.Identity.Name);
+
+    if (stud.Count() > 0)
+    {
+        <body class="body-research-background">
+            <div class="header-container" id="header-container-opp-page">
+                <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+                <div class="header-title">Manage Student Profile</div>
+            </div>
+            <div class="gray-background round-corners" style="padding-bottom: 10px;">
+                <table class="table text-light">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Uid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProfileCreationDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            if (item.Sid == user.Id)
+                            {
+                                hasApp = true;
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Uid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StudentName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProfileCreationDate)
+                                    </td>
+                                    @if (item.Active)
+                                    {
+                                        <td class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                                    }
+                                    else
+                                    {
+                                        <td class="octicon-x-red dt-center"><i class="octicon octicon-x"></i></td>
+                                    }
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.ID"><button type="button" class="btn-group-sm btn-dark">Edit</button></a>
+                                        <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="btn-group-sm btn-success">View</button></a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                @if (!hasApp)
+                {
+                    <p>
+                        <a style="padding-left: 10px;" asp-action="Create"><button type="button" class="btn btn-primary">Create Profile</button></a>
+                    </p>
+                }
+            </div>
+        </body>
+    }
+    else if (admin.Count() > 0 || prof.Count() > 0)
+    {
+        <body class="body-research-background">
+            <div class="header-container" id="header-container-opp-page">
+                <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+                <div class="header-title">Student Profiles</div>
+            </div>
+            <div class="gray-background round-corners">
+                <table class="table text-light">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Uid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.GPA)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StudentSkills)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProfileCreationDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Active)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Uid)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StudentName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GPA)
+                                </td>
+                                <td>
+                                    @{
+                                        // gather a list of the first four skills
+                                        List<string> skills = new List<string>();
+                                        int count = 0;
+                                        string ending = "";
+                                        foreach (var skill in item.StudentSkills)
+                                        {
+                                            if (count == 4)
+                                            {
+                                                ending = "...";
+                                                break;
+                                            }
+                                            skills.Add(skill.SkillName);
+                                            count++;
+                                        }
+                                    }
+                                    @string.Join(", ", skills) @ending
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProfileCreationDate)
+                                </td>
+                                @if (item.Active)
+                                {
+                                    <td class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                                }
+                                else
+                                {
+                                    <td class="octicon-x-red dt-center"><i class="octicon octicon-x"></i></td>
+                                }
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.ID"><button type="button" class="btn-sm btn-success">View</button></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </body>
+    }
+}
+@section Scripts {
+    <link rel="stylesheet" , href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css" />
+}
+
+

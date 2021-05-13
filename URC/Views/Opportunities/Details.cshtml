@@ -1,0 +1,139 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      September 23, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Details page for an Opportunity entity.
+-->
+
+@model URC.Models.Opportunity
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@inject UserManager<URCUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<body class="body-research-background">
+    <div class="header-container" id="header-container-details-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Opportunity Details</div>
+    </div>
+    <div id="opp-details-article" class="gray-background text-light">
+        <header id="opp-details-header">
+            <h4 id="opp-details-title">@Html.DisplayFor(model => model.ProjectName)</h4>
+        </header>
+        <hr id="horizontal-rule-details-page" class="hr-light" />
+        <div id="opp-details-image-container">
+            <img id="opp-details-image" class="float-right img-fluid" src="~/uploads/@Html.DisplayFor(model => model.ProjectImage)" />
+        </div>
+        <div id="opp-details-table">
+            <table>
+                <tr id="details-table-professor">
+                    <td class="td-category-details">Professor:</td>
+                    <td>@Html.DisplayFor(model => model.ProfessorName)</td>
+                </tr>
+                <tr id="details-table-mentor">
+                    <td class="td-category-details">Mentor:</td>
+                    <td>@Html.DisplayFor(model => model.ProjectMentor)</td>
+                </tr>
+                <tr id="details-table-tags">
+                    @{
+                        List<string> tagNames = new List<string>();
+                        foreach (var tag in Model.Tags)
+                        {
+                            tagNames.Add(tag.TagName);
+                        }
+                    }
+                    <td class="td-category-details">Tags:</td>
+                    <td>@string.Join(", ", tagNames)</td>
+                </tr>
+                <tr id="details-table-pay">
+                    <td class="td-category-details">Pay:</td>
+                    <td>$@Html.DisplayFor(model => model.Pay)/hr</td>
+                </tr>
+                <tr id="details-table-filled">
+                    <td class="td-category-details">Filled:</td>
+                    @if (Model.Filled)
+                    {
+                        <td class="octicon-check-green dt-center"><i class="octicon octicon-check"></i></td>
+                    }
+                    else
+                    {
+                        <td class="octicon-dash-red dt-center"><i class="octicon octicon-dash"></i></td>
+                    }
+                </tr>
+            </table>
+        </div>
+        <div id="opp-details-duration">
+            <h5>Project Duration:</h5>
+            <table>
+                <tr id="details-table-begin-date">
+                    <td>Begin Date:</td>
+                    <td>@Html.DisplayFor(model => model.BeginDate)</td>
+                </tr>
+                <tr id="details-table-end-date">
+                    <td>End Date:</td>
+                    <td>@Html.DisplayFor(model => model.EndDate)</td>
+                </tr>
+            </table>
+        </div>
+        <div id="opp-details-requirements">
+            <h5>Required Skills:</h5>
+            <ul>
+                @foreach (var skill in Model.RequiredSkills)
+                {
+                    <li>@skill.SkillName</li>
+                }
+            </ul>
+        </div>
+        <div id="opp-details-description">
+            <h5>Project Description:</h5>
+            <p>
+                @Html.DisplayFor(model => model.ProjectDescription)
+            </p>
+        </div>
+        <a asp-action="Index"><button type="button" class="btn btn-primary" style="margin: 10px 10px;">Back to All Opportunities</button></a>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var stud = User.Claims.Where(o => o.Value == "Student");
+            @if (stud.Count() > 0)
+            {
+                var already_applied = false;
+                var appId = -1;
+                var user = await UserManager.FindByNameAsync(User.Identity.Name);
+                @foreach (var application in Model.Applications)
+                {
+                    if (application.StudentID == user.Id)
+                    {
+                        appId = application.ID;
+                        already_applied = true;
+                        break;
+                    }
+                }
+
+                if (already_applied)
+                {
+                    <a id="apply-button" asp-controller="Applications" asp-action="Edit" asp-route-id="@appId" class="btn btn-primary">Edit your application</a>
+                }
+                else
+                {
+                    <a id="apply-button" asp-controller="Applications" asp-action="Create" asp-route-oppId="@Model.ID" asp-route-oppName="@Model.ProjectName" class="btn btn-primary">Apply for this opportunity!</a>
+                }
+            }
+        }
+    </div>
+</body>
+@section Scripts {
+    <link rel="stylesheet" , href="https://cdnjs.cloudflare.com/ajax/libs/octicons/4.4.0/font/octicons.min.css" />
+}

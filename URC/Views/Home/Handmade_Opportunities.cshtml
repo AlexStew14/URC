@@ -1,0 +1,291 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      September 2, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code for the opportunities page.
+-->
+
+@{
+    ViewData["Title"] = "Opportunities";
+}
+
+<body>
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Research Opportunities at the University of Utah</div>
+    </div>
+    <main>
+        <div id="opportunities">
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-1">
+                    <div class="opp-item-info-container" id="opp-item-info-container-1">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-1">
+                            Artificial Muscle Polymer Experiments
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-1">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Bobby Joe Hill</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Computer Science, Biology</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>March 3, 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-1">
+                        <p id="opp-item-summary-1">
+                            Twisted coiled polymer actuators (TCPAs) are an emergent type of thermomotive artificial muscle that have
+                            recently biome-chanically surpassed human skeletal muscles (HSM). This all results in tensile contraction (TC) and Tensile Stress (TS).
+                            We are trying to optimize the polymer material properties to improve action.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-1">
+                        <img class="opp-item-image" id="opp-item-image-1" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-2">
+                    <div class="opp-item-info-container" id="opp-item-info-container-2">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-2">
+                            City Climate Change Research Assistant
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-2">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Suzy Smith</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Ecology</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>May 10, 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-2">
+                        <p id="opp-item-summary-2">
+                            I am analyzing city climate action plans across the world and trying to find key themes, characteristics,
+                            and patterns of these climate action plans. Specifically, I will be focusing on Ho Chi Minh City, Buenos Aires,
+                            Seoul, and Mexico City, but will also be looking at other city environmental actions as needed for this project.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-2">
+                        <img class="opp-item-image" id="opp-item-image-2" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-3">
+                    <div class="opp-item-info-container" id="opp-item-info-container-3">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-3">
+                            Multiple Computational Research Positions
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-3">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Larry Longbottom</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Computer Science, Information Systems</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>August 21, 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-3">
+                        <p id="opp-item-summary-3">
+                            We are looking for motivated candidates to join the Utah Waves and Architected Materials Group.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-3">
+                        <img class="opp-item-image" id="opp-item-image-3" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-4">
+                    <div class="opp-item-info-container" id="opp-item-info-container-4">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-4">
+                            Undergraduate Research Assistant
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-4">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Oliver Olson</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Biochemistry</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>December 4, 2020</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-4">
+                        <p id="opp-item-summary-4">
+                            Patient with acute ischemic stroke within the last 7 days will have a small blood pressure on their
+                            finger for 15 minutes. We will also use the NeurOptics NPi-200 Pupillometer to measure each enrolled
+                            participants pupil reactivity prior to the finger blood pressure measurement.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-4">
+                        <img class="opp-item-image" id="opp-item-image-4" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-5">
+                    <div class="opp-item-info-container" id="opp-item-info-container-5">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-5">
+                            Undergrad Research Scholars - Wynne Laboratory
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-5">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Jerry Wynne</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Computer Networking</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>April 8, 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-5">
+                        <p id="opp-item-summary-5">
+                            Our laboratory researches hypertension, and in particular, salt-sensitive hypertension.
+                            We investigate this from a cell/molecular basis using cell culture, microscopy and whole animal experiments.
+                            We are interested in the renal and cardiovascular physiology during hypertension, with an emphasis on inflammation.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-5">
+                        <img class="opp-item-image" id="opp-item-image-5" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-6">
+                    <div class="opp-item-info-container" id="opp-item-info-container-6">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-6">
+                            Part Time Research Assitant Wanted In Studying Genetic Diseases
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-6">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Joe Montgomery</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Biology, Genetics</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>June 3, 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-6">
+                        <p id="opp-item-summary-6">
+                            I would like to mentor motivated students. Projects will depend on the previous experience of students.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-6">
+                        <img class="opp-item-image" id="opp-item-image-6" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-7">
+                    <div class="opp-item-info-container" id="opp-item-info-container-7">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-7">
+                            Machine Learning Based Lensless Cameras
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-7">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Susan Donald</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Computer Science, Machine Learning</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>November 22, 2020</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-7">
+                        <p id="opp-item-summary-7">
+                            By exploiting recent advances in machine learning, you will work in a small team to develop several uncoventional cameras.
+                            One example of a such a camera is a lensless camera that is extremely thin lightweight, yet able to perform high resolution imaging.
+                            Important applications in autonomous driving, drones, security, etc. will be explored.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-7">
+                        <img class="opp-item-image" id="opp-item-image-7" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+            <a href="/Home/Handmade_Details">
+                <div class="opp-item" id="opp-8">
+                    <div class="opp-item-info-container" id="opp-item-info-container-8">
+                        <h5 class="opp-item-info-title" id="opp-item-info-title-8">
+                            Wildlife Conservation Research Along the Wasatch Mountain Range Wildland-Urban Interface
+                        </h5>
+                        <table class="opp-item-info-table" id="opp-item-info-table-8">
+                            <tr class="info-table-professor">
+                                <td class="td-category">Professor:</td>
+                                <td>Jeniffer Jacobs</td>
+                            </tr>
+                            <tr class="info-table-tags">
+                                <td class="td-category">Tags:</td>
+                                <td>Ecology, Biology</td>
+                            </tr>
+                            <tr class="info-table-deadline">
+                                <td class="td-category">Deadline:</td>
+                                <td>January 18, 2021</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="opp-item-summary-container" id="opp-item-summary-container-8">
+                        <p id="opp-item-summary-8">
+                            The Wasatch Mountains (WM) are a stronghold for wildlife but contain the most highly recreated National Forests in the country.
+                            There is a lack of research into how wildlife are affected by human recreation, and this hampers conservation action, especially in the WM’s.
+                        </p>
+                    </div>
+                    <div class="opp-item-image-container" id="opp-item-image-container-8">
+                        <img class="opp-item-image" id="opp-item-image-8" src="~/images/uofu.jpg" alt="University of Utah logo" />
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+</body>
+
+
+

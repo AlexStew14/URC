@@ -1,0 +1,186 @@
+﻿<!--
+  Author:    Jantzen Allphin
+  Partner:   None
+  Date:      December 6, 2020
+  Course:    CS 4540, University of Utah, School of Computing
+  Copyright: CS 4540 and Jantzen Allphin - This work may not be copied for use in Academic Coursework.
+
+  I, Jantzen Allphin, certify that I wrote this code from scratch and did not copy it in part or whole from
+  another source.  Any references used in the completion of the assignment are cited in my README file.
+
+  File Contents
+
+     Contains HTML code to display the Application Details page.
+-->
+@model URC.Models.Application
+@using Microsoft.AspNetCore.Identity
+@using URC.Areas.Identity.Data
+
+@inject SignInManager<URCUser> SignInManager
+@{
+    ViewData["Title"] = "Details";
+}
+
+<body class="body-research-background text-light">
+    <div class="header-container" id="header-container-opp-page">
+        <img id="header-image-opp-page" src="~/images/research-medium.jpg" alt="Picture of building on University of Utah campus" />
+        <div class="header-title">Application Details</div>
+    </div>
+    <div class="gray-background round-corners" style="padding-bottom: 10px;">
+        <h3 style="padding-left: 10px;">Application</h3>
+        <hr class="hr-light" />
+        <dl class="row" style="padding-left: 10px;">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Opportunity)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Opportunity.ProjectName)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Statement)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Statement)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Resume)
+            </dt>
+            <dd class="col-sm-2">
+                @Html.DisplayFor(model => model.Resume)
+            </dd>
+            <dd class="col-sm-7">
+                <a href="/Applications/Download?filename=@Model.Resume"><button type="button" class="btn-sm btn-success">Download Resume</button></a>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+        </dl>
+        <h3 style="padding-left: 10px;">Student Profile</h3>
+        <hr class="hr-light" />
+        <dl class="row" style="padding-left: 10px;">
+            @{
+                Student student = (Student)ViewData["Student"];
+                <dt class="col-sm-2">
+                    Uid
+                </dt>
+                <dd class="col-sm-10">
+                    @student.Uid
+                </dd>
+                <dt class="col-sm-2">
+                    Student Name
+                </dt>
+                <dd class="col-sm-10">
+                    @student.StudentName
+                </dd>
+                <dt class="col-sm-2">
+                    Degree
+                </dt>
+                <dd class="col-sm-10">
+                    @student.DegreePlan
+                </dd>
+                <dt class="col-sm-2">
+                    GPA
+                </dt>
+                <dd class="col-sm-10">
+                    @student.GPA
+                </dd>
+                <dt class="col-sm-2">
+                    Completed Courses
+                </dt>
+                <dd class="col-sm-10">
+                    @{
+                        // gather a list of completed courses
+                        List<string> completedCourses = new List<string>();
+                        foreach (var c in student.CompletedCourses)
+                        {
+                            completedCourses.Add(c.CompletedCourseName);
+                        }
+                    }
+                    @string.Join(", ", completedCourses)
+                </dd>
+                <dt class="col-sm-2">
+                    Skills
+                </dt>
+                <dd class="col-sm-10">
+                    @{
+                        // gather a list of skills
+                        List<string> skills = new List<string>();
+                        foreach (var skill in student.StudentSkills)
+                        {
+                            skills.Add(skill.SkillName);
+                        }
+                    }
+                    @string.Join(", ", skills)
+                </dd>
+                <dt class="col-sm-2">
+                    Interests
+                </dt>
+                <dd class="col-sm-10">
+                    @{
+                        // gather a list of interest
+                        List<string> interests = new List<string>();
+                        foreach (var i in student.Interests)
+                        {
+                            interests.Add(i.InterestName);
+                        }
+                    }
+                    @string.Join(", ", interests)
+                </dd>
+                <dt class="col-sm-2">
+                    Personal Statement
+                </dt>
+                <dd class="col-sm-10">
+                    @student.PersonalStatement
+                </dd>
+                <dt class="col-sm-2">
+                    Graduation Date
+                </dt>
+                <dd class="col-sm-10">
+                    @student.ExpectedGraduationDate
+                </dd>
+                <dt class="col-sm-2">
+                    Available Hrs/Week
+                </dt>
+                <dd class="col-sm-10">
+                    @student.AvailableHoursPerWeek
+                </dd>
+                <dt class="col-sm-2" data-toggle="tooltip" data-placement="top" title="Represents whether the Student is actively looking for a position or not">
+                    Active
+                </dt>
+                <dd id="active-check-box" class="col-sm-10">
+                    @student.Active
+                </dd>
+                <dt class="col-sm-2">
+                    Profile Creation Date
+                </dt>
+                <dd class="col-sm-10">
+                    @student.ProfileCreationDate
+                </dd>
+            }
+        </dl>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            var admin = User.Claims.Where(o => o.Value == "Administrator");
+            var prof = User.Claims.Where(o => o.Value == "Professor");
+            var stud = User.Claims.Where(o => o.Value == "Student");
+
+            // professor and not student
+            @if ((prof.Count() > 0 || admin.Count() > 0) && stud.Count() <= 0)
+            {
+                <div>
+                    <a style="padding-left: 10px;" asp-controller="Opportunities" asp-action="Manage" asp-route-id="@Model.OpportunityID"><button type="button" class="btn btn-primary">Return to Manage</button></a>
+                </div>
+            }
+            else if (stud.Count() > 0)
+            {
+                <div>
+                    <a style="padding-left: 10px;" asp-action="Edit" asp-route-id="@Model.ID"><button type="button" class="btn btn-primary">Edit</button></a>
+                    <a asp-action="Index"><button type="button" class="btn btn-secondary">Back to My Applications</button></a>
+                </div>
+            }
+        }
+    </div>
+</body>
