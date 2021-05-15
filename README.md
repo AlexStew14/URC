@@ -1,8 +1,10 @@
 #### Authors: Jantzen Allphin, Alexander Stewart, Tri Tran
-
 #### Date: December 7, 2020
-
 #### Course: CS 4540, University of Utah, School of Computing
+
+# University Research Coordinator
+
+This project was an example Research Coordinator for helping professors and students communicate on research opportunities.  
 
 Images of the project:
 
